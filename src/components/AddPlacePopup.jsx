@@ -32,6 +32,7 @@ function AddPlacePopup({isOpen, onClose}) {
             />
             <span className="popup__error input-mesto-image-error" ></span>
           </label>
+          <button className="popup__button" type="submit">Сохранить</button>
         </PopupWithForm>
     );
 };

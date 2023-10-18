@@ -7,7 +7,7 @@ function Card({card, onCardClick}) {
   return(
     <li className="mesto__item">
       <button className="mesto__delete-button"></button>
-      <img className="mesto__image" src={card.link} onClick={handleClick} />
+      <img className="mesto__image" src={card.link} alt={card.name} onClick={handleClick} />
       <div className="mesto__content">
         <h2 className="mesto__title">{card.name}</h2>
         <div className="mesto__like-container">

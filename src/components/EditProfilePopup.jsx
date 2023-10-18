@@ -34,6 +34,7 @@ function EditProfilePopup({isOpen, onClose}){
             />
             <span className="popup__error input-profile-job-error" ></span>
         </label>
+        <button className="popup__button" type="submit">Сохранить</button>
       </PopupWithForm>
     );
 };

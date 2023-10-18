@@ -29,7 +29,6 @@ function PopupWithForm({name, title, children, button, isOpen, onClose}){
                     noValidate>
                         {children}
                 </form>
-                <button className="popup__button" type="submit">{button}</button>
             </div>
         </div>
     );

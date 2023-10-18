@@ -15,7 +15,10 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
             setUserDescription(userData.about);
             setUserAvatar(userData.avatar);
             setInitialCard(...initialCards, cardsData);
-        });
+        })
+        .catch((err) => {
+            console.log(`Ошибка.....: ${err}`);
+          });
         },  
     []);
  
