@@ -5,7 +5,7 @@ function EditProfilePopup({isOpen, onClose}){
         <PopupWithForm 
           name = {'profile'} 
           title = {'Редактирование профиля'} 
-          button ={'Сохранить'} 
+          buttonText ={'Сохранить'} 
           isOpen ={isOpen} 
           onClose={onClose}>
             <label className="popup__form-field">
@@ -34,7 +34,6 @@ function EditProfilePopup({isOpen, onClose}){
             />
             <span className="popup__error input-profile-job-error" ></span>
         </label>
-        <button className="popup__button" type="submit">Сохранить</button>
       </PopupWithForm>
     );
 };

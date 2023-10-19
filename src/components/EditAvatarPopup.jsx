@@ -5,7 +5,7 @@ function EditAvatarPopup({isOpen, onClose}) {
         <PopupWithForm 
           name = {'avatar'} 
           title = {'Обновить аватар'} 
-          button ={'Сохранить'} 
+          buttonText ={'Сохранить'} 
           isOpen ={isOpen}
           onClose={onClose}>
             <label className="popup__form-field">
@@ -19,7 +19,6 @@ function EditAvatarPopup({isOpen, onClose}) {
             />
             <span className="popup__error input-avatar-error" ></span>
           </label>
-          <button className="popup__button" type="submit">Сохранить</button>
         </PopupWithForm>
     );
 };

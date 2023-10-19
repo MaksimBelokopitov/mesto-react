@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-function PopupWithForm({name, title, children, button, isOpen, onClose}){
+function PopupWithForm({name, title, children, buttonText, isOpen, onClose}){
 
     const popupClose = onClose;
  
@@ -28,6 +28,7 @@ function PopupWithForm({name, title, children, button, isOpen, onClose}){
                     name={name}
                     noValidate>
                         {children}
+                        <button className="popup__button" type="submit">{buttonText}</button>
                 </form>
             </div>
         </div>
