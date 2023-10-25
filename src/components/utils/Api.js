@@ -40,7 +40,7 @@ import React, {Component} from "react";
         method: 'PATCH',
         headers: this._headers, 
         body: JSON.stringify({
-            avatar: link
+            avatar: link.avatar
           })
       });
     };
@@ -74,20 +74,21 @@ import React, {Component} from "react";
             })  
     };
 
-   likeCard(data){
+   changeLikeStatus(data, status){
+    if(status) {
       return this._getRequest(`${this._url}/cards/${data}/likes`, {
           method: 'PUT',
           headers: this._headers, 
           })  
-    };
-
-    dislikeCard(data){
+    }
+    else{
       return this._getRequest(`${this._url}/cards/${data}/likes`, {
         method: 'DELETE',
         headers: this._headers, 
         })  
     };
-} ;
+    }
+  }
 
  const api = new Api({ 
   url: 'https://mesto.nomoreparties.co/v1/cohort-76',

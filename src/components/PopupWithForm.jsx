@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-function PopupWithForm({name, title, children, buttonText, isOpen, onClose}){
+function PopupWithForm({name, title, children, buttonText, isOpen, onClose, onSubmit}){
 
     const popupClose = onClose;
  
@@ -26,6 +26,7 @@ function PopupWithForm({name, title, children, buttonText, isOpen, onClose}){
                     action="submit" 
                     className={`popup__form popup__form_type_${name}`} 
                     name={name}
+                    onSubmit={onSubmit}
                     noValidate>
                         {children}
                         <button className="popup__button" type="submit">{buttonText}</button>
