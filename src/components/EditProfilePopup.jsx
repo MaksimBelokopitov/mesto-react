@@ -1,41 +1,47 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { CurrentUserContext } from "../context/CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
+import { AppContext } from "../context/AppContext";
+import { useForm } from "../hooks/useForm";
 
-function EditProfilePopup({isOpen, onClose, onUpdateUser}){
+function EditProfilePopup({isOpen, onUpdateUser}){
 
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const {values, handleChange, setValues} = useForm({
+    name:'',
+    about: '',
+  });
+
   const currentUser = useContext(CurrentUserContext);
-
+  const appContext = useContext(AppContext);
+ 
   useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-  }, [currentUser]); 
+    setValues({
+      name: currentUser.name,
+      about: currentUser.about});
+  }, [currentUser, isOpen]); 
   
   function handleSubmit(e) {
     e.preventDefault();
 
    onUpdateUser({
-      name,
-      about: description,
-    });
+    name: values.name,
+    about: values.about
+   });
   } 
 
   return(
     <PopupWithForm 
       name = {'profile'} 
       title = {'Редактирование профиля'} 
-      buttonText ={'Сохранить'} 
+      buttonText ={appContext.isLoading ? 'Сохранение...' : 'Сохранить'} 
       isOpen ={isOpen} 
-      onClose={onClose}
       onSubmit={handleSubmit}>
       <label className="popup__form-field">
         <input
           className="popup__input popup__input_type_user-name"
           type="text"
-          value={name ?? ''}
-          onChange={e => { setName(e.target.value)}}
+          value={values.name ?? ''}
+          onChange={handleChange}
           name="name"
           placeholder="Введите ваше имя"
           required
@@ -55,10 +61,8 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}){
           minLength="2"
           maxLength="200"
           id="input-profile-job"
-          value={description ?? ''}
-          onChange={e => {setDescription(e.target.value)
-          }}
-      
+          value={values.about ?? ''}
+          onChange={handleChange}
         />
         <span className="popup__error input-profile-job-error" ></span>
       </label>

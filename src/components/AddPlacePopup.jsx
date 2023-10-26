@@ -1,33 +1,43 @@
-import { useState } from "react";
+import { useEffect, useContext} from "react";
 import PopupWithForm from "./PopupWithForm";
+import { useForm } from "../hooks/useForm";
+import { AppContext } from "../context/AppContext";
 
-function AddPlacePopup({isOpen, onClose, onAddPlace}) {
+function AddPlacePopup({isOpen, onAddPlace}) {
 
-  const [placeName, setPlaceName] = useState('');
-  const [placeLink, setPlaceLink] = useState('')
+  const appContext = useContext(AppContext);
+  const {values, handleChange, setValues} = useForm({
+    name:'',
+    link: '',
+  });
+
+  useEffect(() => {
+    setValues({
+      name: '',
+      about: ''});
+  }, [isOpen]); 
 
   function handleAddPlaceSubmit(e){
     e.preventDefault();
-
+    
     onAddPlace({
-      name: placeName,
-      link: placeLink
+      name: values.name,
+      link: values.link
     })
   }
     return (
         <PopupWithForm 
           name = {'mesto'} 
           title = {'Новое место'} 
-          buttonText ={'Сохранить'} 
+          buttonText ={appContext.isLoading ? 'Сохранение...' : 'Сохранить'} 
           isOpen ={isOpen} 
-          onClose={onClose}
           onSubmit={handleAddPlaceSubmit}>
             <label className="popup__form-field">
             <input
               className="popup__input popup__input_type_mesto-name"
               type="text"
-              value={placeName}
-              onChange={e => { setPlaceName(e.target.value)}}
+              value={values.name ?? ''}
+              onChange={handleChange}
               name="name"
               placeholder="Название"
               required
@@ -41,8 +51,8 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
             <input
               className="popup__input popup__input_type_mesto-image"
               type="url"
-              value={placeLink}
-              onChange={e => { setPlaceLink(e.target.value)}}
+              value={values.link ?? ''}
+              onChange={handleChange}
               name="link"
               placeholder="Ссылка на картинку"
               required
